@@ -18,6 +18,8 @@
 !/tmp/pids/
 !/tmp/pids/.keep
 
+docker/db/mysql/mysql.sock
+
 # Ignore uploaded files in development.
 /storage/*
 !/storage/.keep
