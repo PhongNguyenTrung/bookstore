@@ -1,0 +1,38 @@
+@import "bootstrap";
+
+$blue-color: '#3485e4';
+//header
+header{
+    .navbar-brand {
+        margin-right: 10px;
+        font-size: 1.7em;
+        color: '0d6efd';
+        text-transform: uppercase;
+        letter-spacing: -1px;
+        font-weight: bold;
+    } 
+    .left{
+        font-weight: bold;
+        color: $blue-color;
+    }
+}
+
+//footer
+footer{
+    margin-top: 45px;
+    padding: 5px;
+    ul{
+        display: inline;
+        list-style: none;
+        float: right;
+        margin: auto;
+        li{
+            justify-content: center;
+            margin-left: 15px;
+            a{
+                text-align: center;
+                text-decoration: none;
+            }
+        }
+    }
+}

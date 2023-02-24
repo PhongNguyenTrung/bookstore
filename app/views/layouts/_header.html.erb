@@ -1,0 +1,43 @@
+<header>
+    <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <%= image_tag(asset_path('my_logo.png'), width:"60", height:"40", class:"d-inline-block align-text-center")%>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav left me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Help</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <form class="d-flex me-2 center">
+                        <select class="form-select me-2" aria-label="All Categories">
+                            <option selected>All Categories</option>
+                            <option value="1">Actions</option>
+                            <option value="2">Drama</option>
+                            <option value="3">Science</option>
+                        </select>
+                        <input class="form-control me-2" type="search" placeholder="Title or Author" aria-label="Search">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </form>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="#">Log in</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sign up</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
