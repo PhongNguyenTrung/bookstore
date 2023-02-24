@@ -1,5 +1,11 @@
-// Entry point for the build script in your package.json
-
-import "@hotwired/turbo-rails";
-import "./controllers";
-import * as bootstrap from "bootstrap";
+// Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
+import { Turbo } from "@hotwired/turbo-rails"
+Turbo.session.drive = false 
+// import "controllers"
+import "jquery"
+import "jquery_ujs"
+import "popper"
+import "bootstrap"
+$(document).on("turbo:load", () => {
+  console.log("turbo!");
+});
