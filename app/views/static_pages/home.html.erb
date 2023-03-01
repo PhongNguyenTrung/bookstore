@@ -1,4 +1,32 @@
-<h1>StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<div class="home container">
+    <div id="homecarouselExampleSlidesOnly" class="carousel slide"  data-bs-ride="carousel" >
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="5000">
+                <%= image_tag asset_path('bg4.jpg'), class: "d-block w-100", alt: "Bookstore Background"%>
+                <div class="carousel-caption d-md-block">
+                    <h1>Welcome to Bookstore</h1>
+                    <p>Reading is away the good idea.</p>
+                    <%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-success"%>
+                </div>
+            </div>
+            <div class="carousel-item" data-bs-interval="5000">
+                <%= image_tag asset_path('bg2.jpg'), class: "d-block w-100", alt: "Bookstore Background" %>
+                <div class="carousel-caption d-md-block">
+                    <h1>Welcome to Bookstore</h1>
+                    <p>Book for cozy home evenings.</p>
+                    <%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-success"%>
+                </div>
+            </div>
+            <div class="carousel-item" data-bs-interval="5000">
+                <%= image_tag asset_path('bg3.jpg'), class: "d-block w-100", alt: "Bookstore Background" %>
+                <div class="carousel-caption d-md-block">
+                    <h1>Welcome to Bookstore</h1>
+                    <p>Home is where the book are.</p>
+                    <%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-success"%>
+                </div>  
+            </div>
+        </div>
+    </div>
+</div>
 
 

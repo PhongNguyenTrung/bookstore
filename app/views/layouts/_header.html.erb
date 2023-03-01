@@ -7,35 +7,53 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav left me-auto mb-2 mb-lg-0">
+            <div class="collapse navbar-collapse d-lg-flex justify-content-lg-between" id="navbarSupportedContent">
+                <ul class="navbar-nav left mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <%= link_to "Home", root_path, class: "nav-link", aria: { current: request.path == root_path ? "page" : nil }%>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Help</a>
+                        <%= link_to "Help", help_path, class: "nav-link", aria: { current: request.path == root_path ? "page" : nil }%>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                        <%= link_to "About", '#', class: "nav-link", aria: { current: request.path == root_path ? "page" : nil }%>
                     </li>
                 </ul>
-                <ul class="navbar-nav mb-2 mb-lg-0">
-                    <form class="d-flex me-2 center">
-                        <select class="form-select me-2" aria-label="All Categories">
+                <div class="navbar-nav mb-2 mb-lg-0">
+                    <form class="d-flex align-items-center">
+                        <select class="form-select me-2 m-auto" aria-label="All Categories">
                             <option selected>All Categories</option>
                             <option value="1">Actions</option>
                             <option value="2">Drama</option>
                             <option value="3">Science</option>
                         </select>
-                        <input class="form-control me-2" type="search" placeholder="Title or Author" aria-label="Search">
+                        <input class="form-control me-2 m-auto" type="search" placeholder="Title or Author" aria-label="Search">
                         <button class="btn btn-primary" type="submit">Search</button>
                     </form>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="#">Log in</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Sign up</a>
-                    </li>
+                </div>
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <% if user_signed_in? %>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <a class="dropdown-toggle" id="dropdownMenuUser" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                                    <strong> Welcome <%= current_user.name %> </strong>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start" aria-labelledby="dropdownMenuUser">
+                                    <li><%= button_to "Profile", edit_user_registration_path, method: :get, class: "dropdown-item" %></li>
+                                    <li><%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                    <% else %>
+                        <li class="nav-item">
+                            <i class="bi bi-box-arrow-left"></i>
+                            <a class="nav-link" type="button" data-bs-toggle="modal" data-bs-target="#login">Log in</a>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to "Sign up", new_user_registration_path, type:"button", class: 'nav-link' %>
+                        </li>
+                    <% end %>
                 </ul>
             </div>
         </div>
