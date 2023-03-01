@@ -1,0 +1,58 @@
+<!-- Modal Login -->
+<div class="modal fade" id="login" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Log in</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <%= form_with(model: @user, local: true) do |f| %> 
+                    <%= f.label :email %> 
+                    <%= f.text_field :email %>
+                    
+                    <%= f.label :password %>
+                    <%= f.password_field :password %>
+
+                    <%= f.submit "Login", class: "btn btn-primary" %>
+                <% end %>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="signup" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Sign up</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <%# <%= render 'devise/registrations/new', resource: User, resource_name: :user, %>
+              <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+                <%= f.label :email %>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                
+                <%= f.label :password %>
+                <%= f.password_field :password, autocomplete: "new-password" %>
+                
+                <%= f.label :password_confirmation %>
+                <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+                
+                <div class="form-group">
+                  <%= f.submit "Sign up", class: "btn btn-primary" %>
+                </div>
+              <% end %>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

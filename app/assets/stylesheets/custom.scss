@@ -1,8 +1,28 @@
 @import "bootstrap";
-
+/* mixins, variables, etc. */
 $blue-color: '#3485e4';
+
+@mixin box_sizing {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    }
+/* miscellaneous */
+.debug_dump {
+    clear: both;
+    float: left;
+    width: 100%;
+    margin-top: 45px;
+    @include box_sizing;
+    }
+
+//typography styles
+h2{
+    text-align: center;
+}
 //header
 header{
+    margin-bottom: 20px;
     .navbar-brand {
         margin-right: 10px;
         font-size: 1.7em;
@@ -15,7 +35,18 @@ header{
         font-weight: bold;
         color: $blue-color;
     }
+    .dropdown {
+        a{
+            text-decoration: none; 
+        }
+        .dropdown-menu{
+            max-width: 1000%;
+            right: 0;
+            left: auto;
+        }
+    }
 }
+
 
 //footer
 footer{
@@ -34,5 +65,85 @@ footer{
                 text-decoration: none;
             }
         }
+    }
+}
+
+// home
+.home{
+    #homecarouselExampleSlidesOnly{
+        .carousel-item {
+            max-height: 400px;
+            border-radius: 20px;
+        }
+    }
+}
+
+// forms
+input, textarea, select, .uneditable-input{
+    border: 1px solid #bbb;
+    width: 100%;
+    margin-bottom: 15px;
+    padding-left: 5px;
+    @include box_sizing;
+}
+input {
+    height: auto !important;
+}
+form{
+    label{
+        font-weight: bold;
+    }
+    #error_explanation {
+        color: red;
+        ul {
+            color: red;
+            margin: 0 0 30px 0;
+        }
+    }
+    .field_with_errors {
+        @extend .has-error !optional;
+        .form-control {
+            color: red;
+        }
+    }
+}
+
+#login{
+    .modal-header{
+        text-align: center;
+    }
+    .modal-body{
+        margin: auto;
+        .checkbox{
+            font-weight: normal;
+            width: 100%;
+            input{
+                width: 20px;
+                margin-right: 5px;
+            }
+        }
+        .forget{
+            text-align: center;
+        }
+    } 
+}
+
+#new_user{
+    .checkbox{
+        font-weight: normal;
+        width: 100%;
+        input{
+            width: 20px;
+            margin-right: 5px;
+        }
+    }
+}
+
+// edit page
+.cancel-account{
+    padding-top: 20px;
+    text-align: center;
+    a{
+        float: right
     }
 }
