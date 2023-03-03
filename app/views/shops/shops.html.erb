@@ -1,0 +1,28 @@
+<h2>All My Shop</h2>
+<%= link_to " Add shop", new_shop_path, class: "btn btn-primary float-end mb-2 bi bi-plus-circle"%>
+<% if current_user.shops.any? %>
+    <table class="All-shops table table-striped table-hover">
+    <thead>
+        <tr class="table-dark">
+            <th scope="col">#</th>
+            <th scope="col">Shop Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Tax_code</th>
+            <th scope="col">Actions </th>
+        </tr>
+    </thead>
+    <tbody>
+        <% current_user.shops.each.with_index(1) do |shop, index| %>
+            <tr>
+                <th scope="row"><%= index %></th>
+                <td><%= shop.name %></td>
+                <td><%= shop.address %></td>
+                <td><%= shop.phone %></td>
+                <td><%= shop.tax_code %></td>
+                <td><%= link_to "Detail", shop_path(shop)%> <%= link_to "Edit", edit_shop_path(shop)%> <%= link_to "Delete", shop_path(shop), method: :delete %> </td>
+            </tr>
+        <% end %>
+    </tbody>
+    </table>    
+<% end %>

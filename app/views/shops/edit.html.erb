@@ -1,2 +1,26 @@
-<h1>Shops#edit</h1>
-<p>Find me in app/views/shops/edit.html.erb</p>
+<% provide(:title, "Update Shop")%>
+<h2>Update <%= @shop.name%> Information</h2>
+
+<div class="row justify-content-center">
+    <div class="col-md-6 col-md-offset-3">
+        <%= form_with(model: @shop, local: true) do |f| %>
+            <%= render "devise/shared/error_messages", resource: @shop %>  
+            <%= f.label :name %>
+            <%= f.text_field :name, autofocus: true%>
+
+            <%= f.label :address %>
+            <%= f.text_field :address%>
+
+            <%= f.label :phone %>
+            <%= f.text_field :phone %>
+
+            <%= f.label :tax_code %>
+            <%= f.number_field :tax_code %>
+
+            <%= f.label :description %>
+            <%= f.text_area :description %>
+
+            <%= f.submit "Save changes", class: "btn btn-primary" %>
+        <% end %>
+    </div>
+</div>

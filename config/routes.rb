@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
   get 'shops/new'
   get 'shops/edit'
+  get 'showAll', to: 'shops#shops'
   devise_for :users
   root 'static_pages#home'
   get 'help', to: 'static_pages#help'
+  resources :shops do
+    resources :books
+  end
   # as :user do
   #   get 'signin' => 'devise/sessions#new'
   #   post 'signin' => 'devise/sessions#create'

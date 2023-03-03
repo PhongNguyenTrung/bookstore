@@ -1,0 +1,71 @@
+<% provide(:title, @shop.name) %>
+<h2>All Books from <%= @shop.name%></h2>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary float-end mb-2 bi bi-plus-circle" data-bs-toggle="modal" data-bs-target="#newBook">
+  Add book
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="newBook" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New book</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form_with(model: @book, url: shop_books_path(@shop), local: true, as: :book) do |f| %>  
+            <%= f.label :title %>
+            <%= f.text_field :title, autofocus: true, name: "book[title]"%>
+
+            <%= f.label :price %>
+            <%= f.number_field :price, name: "book[price]" %>
+
+            <%= f.label :year %>
+            <%= f.date_field :year, name: "book[year]" %>
+
+            <%= f.label :amount %>
+            <%= f.number_field :amount,  name: "book[amount]" %>
+
+            <%= f.label :img_url %>
+            <%= f.text_field :img_url,  name: "book[url]" %>
+
+            <%= f.label :description %>
+            <%= f.text_area :description,  name: "book[description]" %>
+
+            <%= f.submit "Create", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div>
+    <% if @shop.books.any? %>
+    <table class="All-shops table table-striped table-hover">
+    <thead>
+        <tr class="table-dark">
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Price</th>
+            <th scope="col">Year</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @books.each.with_index(1) do |book, index| %>
+            <tr>
+                <th scope="row"><%= index %></th>
+                <td><%= book.title %></td>
+                <td><%= book.price %></td>
+                <td><%= book.year %></td>
+                <td><%= book.amount %></td>
+                <td><%= link_to "Edit", edit_shop_book_path(@shop, book)%> <%= link_to "Delete", shop_book_path(@shop, book), method: :delete %> </td>
+            </tr>
+        <% end %>
+    </tbody>
+    </table>    
+    <% end %>
+</div>

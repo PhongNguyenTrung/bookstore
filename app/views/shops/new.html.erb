@@ -1,2 +1,30 @@
-<h1>Shops#new</h1>
-<p>Find me in app/views/shops/new.html.erb</p>
+<% provide(:title, 'My Shop') %>
+<h2>Create My Shop</h2>
+<!-- Modal Create Shop -->
+
+<div class="row justify-content-center">
+  <div class="col-md-6 col-md-offset-3">
+
+  <%= form_with(model: @shop, local: true) do |f| %>
+    <%= render "devise/shared/error_messages", resource: @shop %>
+    <%= f.label :name %>
+    <%= f.text_field :name, autofocus: true%>
+
+    <%= f.label :address %>
+    <%= f.text_field :address%>
+
+    <%= f.label :phone %>
+    <%= f.text_field :phone %>
+
+    <%= f.label :tax_code %>
+    <%= f.number_field :tax_code %>
+
+    <%= f.label :descrition %>
+    <%= f.text_area :descrition %>
+
+    <%= f.submit "Create", class: "btn btn-primary" %>
+
+  <% end %>
+
+  </div>
+</div>

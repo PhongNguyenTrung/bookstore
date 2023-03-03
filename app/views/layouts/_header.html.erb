@@ -13,11 +13,16 @@
                         <%= link_to "Home", root_path, class: "nav-link", aria: { current: request.path == root_path ? "page" : nil }%>
                     </li>
                     <li class="nav-item">
-                        <%= link_to "Help", help_path, class: "nav-link", aria: { current: request.path == root_path ? "page" : nil }%>
+                        <%= link_to "Help", help_path, class: "nav-link", aria: { current: request.path == help_path ? "page" : nil }%>
                     </li>
                     <li class="nav-item">
                         <%= link_to "About", '#', class: "nav-link", aria: { current: request.path == root_path ? "page" : nil }%>
                     </li>
+                    <% if user_signed_in? %>
+                        <li class="nav-item">
+                            <%= link_to "My Shop", showAll_path, class: "nav-link", aria: { current: request.path == root_path ? "page" : nil }%>
+                        </li>
+                    <%end%>
                 </ul>
                 <div class="navbar-nav mb-2 mb-lg-0">
                     <form class="d-flex align-items-center">
@@ -47,7 +52,6 @@
 
                     <% else %>
                         <li class="nav-item">
-                            <i class="bi bi-box-arrow-left"></i>
                             <a class="nav-link" type="button" data-bs-toggle="modal" data-bs-target="#login">Log in</a>
                         </li>
                         <li class="nav-item">

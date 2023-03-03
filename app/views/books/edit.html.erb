@@ -1,0 +1,29 @@
+<% provide(:title, "Update Book")%>
+<h2><%= @book.title%></h2>
+
+<div class="row justify-content-center">
+    <div class="col-md-6 col-md-offset-3">
+        <%= form_with(model: @book, url: shop_book_path, local: true) do |f| %>
+            <%= render "devise/shared/error_messages", resource: @book %>
+            <%= f.label :title %>
+            <%= f.text_field :title, autofocus: true%>
+
+            <%= f.label :price %>
+            <%= f.number_field :price %>
+
+            <%= f.label :year %>
+            <%= f.date_field :year %>
+
+            <%= f.label :amount %>
+            <%= f.number_field :amount %>
+
+            <%= f.label :img_url %>
+            <%= f.text_field :img_url %>
+
+            <%= f.label :description %>
+            <%= f.text_area :description %>
+
+            <%= f.submit "Update", class: "btn btn-primary" %>
+        <% end %>
+    </div>
+</div>

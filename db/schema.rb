@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_28_071008) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_03_035522) do
+  create_table "books", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "title"
+    t.decimal "price", precision: 10
+    t.date "year"
+    t.integer "amount"
+    t.text "descrition"
+    t.string "img_url"
+    t.bigint "shop_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shop_id"], name: "index_books_on_shop_id"
+  end
+
   create_table "shops", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "address"
@@ -19,6 +32,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_071008) do
     t.decimal "tax_code", precision: 10
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_shops_on_user_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -36,4 +51,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_071008) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "books", "shops"
+  add_foreign_key "shops", "users"
 end
