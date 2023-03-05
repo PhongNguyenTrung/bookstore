@@ -1,3 +1,4 @@
+require 'kaminari'
 class ShopsController < ApplicationController
   before_action :authenticate_user!
   def new
@@ -32,11 +33,17 @@ class ShopsController < ApplicationController
 
   def show
     @shop = Shop.find(params[:id])
-    @books = @shop.books
+    @books = @shop.books.order(:title).page(params[:page]).per(20)
     # puts(@books)
   end
 
   def showAll; end
+
+  def shops
+    return unless current_user.shops.any?
+
+    @shops = current_user.shops.order(:name).page(params[:page]).per(10)
+  end
 
   def destroy
     Shop.find(params[:id]).destroy
