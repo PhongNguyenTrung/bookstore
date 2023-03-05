@@ -38,3 +38,9 @@ users = User.order(:created_at).take(5)
     end
   end
 end
+
+10.times do
+  name = Faker::Book.unique.genre
+  description = Faker::Lorem.sentence(word_count: 20)
+  Category.create!(name:, description:)
+end
