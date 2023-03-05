@@ -1,0 +1,74 @@
+<h2>All My Shop</h2>
+<%= link_to " Add shop", new_shop_path, class: "btn btn-primary float-end mb-2 bi bi-plus-circle"%>
+<% if current_user.shops.any? %>
+<div class="debug_dump table-responsive">
+    <table class="All-shops table table-striped table-hover">
+    <thead>
+        <tr class="table-dark">
+            <th scope="col">#</th>
+            <th scope="col">Shop Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Tax_code</th>
+            <th scope="col">Actions </th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @shops.each.with_index(1) do |shop, index| %>
+            <tr>
+                <th scope="row"><%= index %></th>
+                <td><%= shop.name %></td>
+                <td><%= shop.address %></td>
+                <td><%= shop.phone %></td>
+                <td><%= shop.tax_code %></td>
+                <td><%= link_to "Detail", shop_path(shop)%> <%= link_to "Edit", edit_shop_path(shop)%> <%= link_to "Delete", shop_path(shop), method: :delete %> </td>
+            </tr>
+        <% end %>
+    </tbody>
+    </table> 
+
+  <% if @shops.total_pages > 1 %>
+    <nav aria-label="Page navigation">
+      <ul class="pagination justify-content-center">
+
+        <% if @shops.current_page == 1 %>
+          <li class="page-item disabled">  
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+        <% else %>
+          <li class="page-item">  
+            <a class="page-link" href="<%= url_for(page: @shops.current_page - 1)%>" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+        <% end %>
+          
+        <% (1..@shops.total_pages).each do |page| %>
+          <% if page == @shops.current_page %>
+            <li class="page-item active"><a class="page-link" href="#"><%=page%></a></li>
+          <% else %>
+            <li class="page-item"><a class="page-link" href="<%= url_for(page: page) %>"><%=page%></a></li>
+          <% end %>
+        <% end %>
+      
+        <% if @shops.current_page == @shops.total_pages %>
+          <li class="page-item disabled">  
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        <% else %>
+          <li class="page-item">  
+            <a class="page-link" href="<%= url_for(page: @shops.current_page + 1)%>" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        <% end %>
+      </ul>
+    </nav>
+  <% end %>
+
+</div>   
+<% end %>
