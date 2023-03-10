@@ -34,7 +34,8 @@ class ShopsController < ApplicationController
   def show
     @shop = Shop.find(params[:id])
     @books = @shop.books.order(:title).page(params[:page]).per(20)
-    # puts(@books)
+    @book = @shop.books.build
+    @category = Category.all.order(:name)
   end
 
   def showAll; end

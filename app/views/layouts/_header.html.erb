@@ -32,9 +32,6 @@
                             <% Category.all.each do |type| %>
                                 <option value="<%= type.id %>"><%= type.name %></option>
                             <% end %>
-                            <%# <option value="1">Actions</option>
-                            <option value="2">Drama</option>
-                            <option value="3">Science</option> %>
                         </select>
                         <input class="form-control me-2 m-auto" type="search" placeholder="Title or Author" aria-label="Search">
                         <button class="btn btn-primary" type="submit">Search</button>

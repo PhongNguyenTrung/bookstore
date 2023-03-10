@@ -1,6 +1,8 @@
 @import "bootstrap";
+@import "select2";
+// @import 'select2-bootstrap';
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css");
-
+@import url("https://unpkg.com/select2@4.1.0-rc.0/dist/css/select2.min.css");
 /* mixins, variables, etc. */
 $blue-color: '#3485e4';
 
@@ -161,4 +163,9 @@ form{
     label{
         text-align: left;
     }
+}
+
+// ------------------- Book --------------------- //
+.select2-container--default .select2-selection--multiple .select2-selection__choice__display{
+    padding-left: 20px;
 }

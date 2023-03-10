@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_05_051510) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_06_034252) do
   create_table "books", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title"
     t.decimal "price", precision: 10
@@ -21,7 +21,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_05_051510) do
     t.bigint "shop_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "author"
+    t.string "publisher"
     t.index ["shop_id"], name: "index_books_on_shop_id"
+  end
+
+  create_table "books_categories", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "book_id", null: false
+    t.bigint "category_id", null: false
   end
 
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

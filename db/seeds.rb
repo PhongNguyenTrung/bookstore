@@ -31,10 +31,12 @@ users = User.order(:created_at).take(5)
     shop = user.shops.create!(name:, phone:, address:, description:)
     50.times do
       title = Faker::Book.title
+      author = Faker::Book.author
+      publisher = Faker::Book.publisher
       price = Faker::Number.between(from: 10_000, to: 10_000_000)
       amount = 10
       description1 = Faker::Lorem.sentence(word_count: 20)
-      shop.books.create!(title:, price:, amount:, descrition: description1)
+      shop.books.create!(title:, price:, amount:, author:, publisher:, descrition: description1)
     end
   end
 end

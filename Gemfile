@@ -57,6 +57,12 @@ gem 'bootstrap', '~> 5.1.3'
 gem 'importmap-rails'
 
 gem 'kaminari'
+
+gem 'select2-rails', '~> 4.0', '>= 4.0.3'
+
+# Gemfile
+gem 'awesome_print', require: 'ap'
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 

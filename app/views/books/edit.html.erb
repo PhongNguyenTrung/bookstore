@@ -8,6 +8,15 @@
             <%= f.label :title %>
             <%= f.text_field :title, autofocus: true%>
 
+            <%= f.label :author %>
+            <%= f.text_field :author%>
+
+            <%= f.label :publisher %>
+            <%= f.text_field :publisher%>
+
+            <%= f.label :Category %>
+            <%= f.select :category_ids, options_for_select(Category.all.map{ |c| [c.name, c.id] }, @book.category_ids), { include_hidden: false }, {class: 'js-example-basic-multiple', multiple: 'multiple'} %>
+            
             <%= f.label :price %>
             <%= f.number_field :price %>
 
