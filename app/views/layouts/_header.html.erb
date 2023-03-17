@@ -13,7 +13,7 @@
                         <%= link_to "Home", root_path, class: "nav-link", aria: { current: request.path == root_path ? "page" : nil }%>
                     </li>
                     <li class="nav-item">
-                        <%= link_to "Help", help_path, class: "nav-link", aria: { current: request.path == help_path ? "page" : nil }%>
+                        <%= link_to "Category", category_path, class: "nav-link", aria: { current: request.path == category_path ? "page" : nil }%>
                     </li>
                     <li class="nav-item">
                         <%= link_to "About", '#', class: "nav-link", aria: { current: request.path == root_path ? "page" : nil }%>
@@ -25,17 +25,13 @@
                     <%end%>
                 </ul>
                 <div class="navbar-nav mb-2 mb-lg-0">
-                    <form class="d-flex align-items-center">
-                        <select class="form-select me-2 m-auto" aria-label="All Categories">
-                            
-                            <option selected>All Categories</option>
-                            <% Category.all.each do |type| %>
-                                <option value="<%= type.id %>"><%= type.name %></option>
-                            <% end %>
-                        </select>
-                        <input class="form-control me-2 m-auto" type="search" placeholder="Title or Author" aria-label="Search">
-                        <button class="btn btn-primary" type="submit">Search</button>
-                    </form>
+
+                    <%= form_with url: category_path, method: :get, class:"d-flex align-items-center" do |f| %>
+                        <%= f.select :category, options_for_select([["All Category", 0]]+(Category.all.order(:name).map{ |c| [c.name, c.id] }), selected: 0), { include_hidden: false }, {class:"form-select me-2 m-auto"}%>
+                        <%= f.text_field :title, placeholder: "Enter Title...", class:"form-control me-2 m-auto"%>
+                        <%= f.submit "Search", class:'btn btn-primary m-auto w-50'%>
+                    <% end %>
+                   
                 </div>
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     <% if user_signed_in? %>
@@ -46,6 +42,7 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start" aria-labelledby="dropdownMenuUser">
                                     <li><%= button_to "Profile", edit_user_registration_path, method: :get, class: "dropdown-item" %></li>
+                                    <li><%= button_to "My Cart", '#', class: "dropdown-item" %></li>
                                     <li><%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
                                 </ul>
                             </div>

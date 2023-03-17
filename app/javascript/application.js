@@ -21,15 +21,11 @@ $(document).on("turbo:load", () => {
     console.log("finding search term...",$searchfield);
   });
   $(".js-example-basic-multiple").select2({
-    // theme: "bootstrap4",
-    // placeholder: "Choose book's category",
     width: '100%',
   });
   $(".js-example-basic-multiple").on('select2:opening select2:closing', function( event ) {
     var $searchfield = $( '#'+event.target.id).parent().find('.select2-search__field');
-    // $searchfield.prop('disabled', true);
     $searchfield.css('display', 'none');
-    // $searchfield.attr('inputmode','none')
     console.log("finding search term...",$searchfield);
   });
 });

@@ -1,9 +1,19 @@
 class BooksController < ApplicationController
-  before_action :current_shop
+  before_action :current_shop, only: %i[edit create update destroy]
   def new; end
+
+  def show
+    @book = Book.find(params[:id])
+    @shop = Shop.find(@book.shop_id)
+    @categories = []
+    @book.categories.each do |category|
+      @categories.push category.name
+    end
+  end
 
   def edit
     @book = @current_shop.books.find(params[:id])
+    @category = Category.all.order(:name)
   end
 
   def create
