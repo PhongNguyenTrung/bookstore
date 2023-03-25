@@ -5,6 +5,7 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
     @shop = Shop.find(@book.shop_id)
+    @cart_detail = CartDetail.new
     @categories = []
     @book.categories.each do |category|
       @categories.push category.name

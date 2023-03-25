@@ -17,11 +17,11 @@ class ShopsController < ApplicationController
   end
 
   def edit
-    @shop = Shop.find(params[:id])
+    @shop = current_user.shops.find(params[:id])
   end
 
   def update
-    @shop = Shop.find(params[:id])
+    @shop = current_user.shops.find(params[:id])
     if @shop.update(shop_params)
       flash[:notice] = 'Shop has been updated!'
       redirect_to showAll_path
@@ -32,7 +32,7 @@ class ShopsController < ApplicationController
   end
 
   def show
-    @shop = Shop.find(params[:id])
+    @shop = current_user.shops.find(params[:id])
     @books = @shop.books.order(:title).page(params[:page]).per(20)
     @book = @shop.books.build
     @category = Category.all.order(:name)
@@ -47,7 +47,7 @@ class ShopsController < ApplicationController
   end
 
   def destroy
-    Shop.find(params[:id]).destroy
+    current_user.shops.find(params[:id]).destroy
     flash[:notice] = 'Deleted successfully!'
     redirect_to showAll_path
   end

@@ -7,8 +7,9 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 # Generate users database
-User.create!(name: 'Phong Nguyen', email: 'mattowindy@gmail.com', phone: '0123456789', address: 'KTX khu A',
-             password: '111111', password_confirmation: '111111')
+user = User.create!(name: 'Phong Nguyen', email: 'mattowindy@gmail.com', phone: '0123456789', address: 'KTX khu A',
+                    password: '111111', password_confirmation: '111111')
+user.cart = Cart.new
 
 99.times do |n|
   name =  Faker::Name.name
@@ -16,8 +17,9 @@ User.create!(name: 'Phong Nguyen', email: 'mattowindy@gmail.com', phone: '012345
   address = Faker::Address.full_address
   phone = Faker::Number.leading_zero_number(digits: 10)
   password = 'password'
-  User.create!(name:, email:, address:, phone:, password:,
-               password_confirmation: password)
+  user = User.create!(name:, email:, address:, phone:, password:,
+                      password_confirmation: password)
+  user.cart = Cart.new
 end
 
 # Generates shops for a sunset of users

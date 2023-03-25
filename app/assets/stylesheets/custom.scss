@@ -333,3 +333,89 @@ form{
         opacity: 0.7;
     }
 }
+
+// -------------------- Cart Page ------------------ //
+.cart{
+    margin: 0 auto;
+    padding: 50px 100px;
+    background-color: $gray-background;
+    .cart-table{
+        table{
+            .table-header{
+                background-color: white;
+            }
+            thead{
+                th{
+                    padding: 20px 10px;
+                }
+            }
+            tbody{
+                .title, .sub-total{
+                    font-weight: bold;
+                }
+                .price{
+                    color: $gray-text;
+                }
+                .quantity{
+                    input{
+                        width: 20%;
+                        text-align: center;
+                    }
+                }
+                .sub-total{
+                    color: $red;
+                }
+                img{
+                    max-width: 100px;
+                    padding-right: 10px;
+                }
+                .title{
+                    a{
+                        text-decoration: none;
+                        color: black
+                    }
+                    a:hover{
+                        color: $red-color;
+                    }
+                }
+    
+                tr:last-child{
+                    height: 100px;
+                    .cart-coupon-inner{
+                        input{
+                            margin-bottom: 0;
+                        }
+                    }
+                    .actions{
+                        text-align: right;
+                    }
+                }
+            }   
+        }
+    }
+    
+    .cart-totals{
+        margin-top: 50px;
+        width: 48%;
+        float: right;
+        table{
+            tr{        
+                td{
+                    padding: 20px;
+                }        
+                td:last-child{
+                    background-color: white;
+                    
+                }
+            }
+            
+        }
+        .proceed-to-checkout{
+            a{
+                border-radius: 0;
+            }
+        }
+        
+    }
+    
+}

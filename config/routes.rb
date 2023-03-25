@@ -1,17 +1,24 @@
 Rails.application.routes.draw do
+  # get 'cart_details/create'
+  # get 'cart_details/update'
+  # get 'cart_details/destroy'
+  get 'carts/show'
   get 'shops/new'
   get 'shops/edit'
   get 'showAll', to: 'shops#shops'
   get 'search', to: 'static_pages#search'
+  get 'category', to: 'static_pages#category'
 
   devise_for :users
   root 'static_pages#home'
-  get 'category', to: 'static_pages#category'
 
   resources :books
   resources :shops do
     resources :books
   end
+
+  resource :cart, only: [:show]
+  resource :cart_details
   # as :user do
   #   get 'signin' => 'devise/sessions#new'
   #   post 'signin' => 'devise/sessions#create'

@@ -6,27 +6,17 @@ class StaticPagesController < ApplicationController
 
   def category
     @categories = Category.all
-   
-    # @books = if params[:category_id].present? && params[:category_id] != '0'
-    #            Category.find(params[:category_id]).books
-    #          else
-    #            Book.all
-    #          end
-    # @books = @books.order(:title).page(params[:page]).per(12)
 
-    return unless params[:category].present?
+    # return unless
 
-    @books = if params[:category] != '0'
-                 @category = Category.find(params[:category]).name
-                 Category.find(params[:category]).books
-               else
-                 @category = 'All Categories'
-                 Book.all
-               end
-    if params[:title].present? && (params[:title] != '')
-      @books =@books.where('title LIKE ?', "%#{params[:title]}%")
-    end
-    @show_search = true
+    @books = if params[:category].present? && params[:category] != '0'
+               @category = Category.find(params[:category]).name
+               Category.find(params[:category]).books
+             else
+               @category = 'All Categories'
+               Book.all
+             end
+    @books = @books.where('title LIKE ?', "%#{params[:title]}%") if params[:title].present? && (params[:title] != '')
     @books = @books.order(:title).page(params[:page]).per(12)
   end
 end

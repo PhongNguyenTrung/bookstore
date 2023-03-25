@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_10_152954) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_20_030550) do
   create_table "books", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title"
     t.decimal "price", precision: 10
@@ -29,6 +29,27 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_10_152954) do
   create_table "books_categories", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "book_id", null: false
     t.bigint "category_id", null: false
+  end
+
+  create_table "cart_details", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.boolean "status"
+    t.integer "quantity"
+    t.decimal "total_price", precision: 10
+    t.bigint "cart_id", null: false
+    t.bigint "book_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_cart_details_on_book_id"
+    t.index ["cart_id"], name: "index_cart_details_on_cart_id"
+  end
+
+  create_table "carts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "quantity"
+    t.decimal "total_price", precision: 10
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -67,5 +88,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_10_152954) do
   end
 
   add_foreign_key "books", "shops"
+  add_foreign_key "cart_details", "books"
+  add_foreign_key "cart_details", "carts"
+  add_foreign_key "carts", "users"
   add_foreign_key "shops", "users"
 end
