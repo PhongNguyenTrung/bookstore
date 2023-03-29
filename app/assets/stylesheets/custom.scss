@@ -419,3 +419,68 @@ form{
     }
     
 }
+
+///  ---------------- Order --------------------- /// 
+.order{
+    margin: 0 auto;
+    padding: 50px 100px;
+    background-color: $gray-background;
+    .order-review{
+        background-color: white;
+    
+        table{
+            font-weight: bold;
+            font-size: large;
+            width: 90%;
+            tbody{
+                margin: 20px;  
+            }
+            tr{
+                // height: 50px;
+                td{
+                    padding: 20px;
+                }
+            }
+            tr.item{
+                font-size: normal;
+                color: $blue-color;
+                font-weight: normal;
+                border-bottom: 1px solid $gray-text;
+            }
+            tr:last-child{
+                border-top: 1px solid $gray-text;
+                color: $red-color;
+            }
+        }
+    }
+
+    .payment{
+        background-color: white;
+        padding: 20px;
+        input{
+            height: 100%;
+            width: 20px;
+        }
+        input#shipping_address{
+            width: 100%;
+        }
+        label{
+            font-size: large;
+            font-weight: bold;
+        }
+        ul{
+            list-style: none;
+        }
+        li{
+            border-bottom: 1px solid $gray-text;
+            padding: 10px;
+        }
+        li:last-child{
+            border-bottom: none;
+            padding-top: 20px;
+            button{
+                border-radius: 0;
+            }
+        }
+    }
+}

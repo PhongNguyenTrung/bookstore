@@ -4,20 +4,20 @@
         <tbody>
             <tr class="cart-subtotal">
                 <td class="table-dark col-3">Subtotal</th>
-                <td colspan="2"><%= number_to_currency @sub_total%></td>
+                <td colspan="2"><%= number_to_currency 0%></td>
             </tr>
             <tr class="cart-coupon">
                 <td class="table-dark col-3">Discount</th>
-                <td colspan="2"><%= number_to_currency @voucher%></td>
+                <td colspan="2"><%= number_to_currency 0%></td>
             </tr>
             <tr class="order-total">
                 <td class="table-dark col-3">Total</th>
-                <td colspan="2"><%= number_to_currency @total%></td>
+                <td colspan="2"><%= number_to_currency 0%></td>
             </tr>
         </tbody>
     </table>
     <div class="proceed-to-checkout my-2">
-        <%= link_to "Proceed to checkout", '#', class: 'btn btn-danger btn-lg w-100'%>
+        <%= link_to "Proceed to checkout", order_show_path, class: 'btn btn-danger btn-lg w-100'%>
     </div>
 </div>
 <div style="clear: both;"></div>

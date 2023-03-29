@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'order/show'
   # get 'cart_details/create'
   # get 'cart_details/update'
   # get 'cart_details/destroy'
@@ -18,7 +19,8 @@ Rails.application.routes.draw do
   end
 
   resource :cart, only: [:show]
-  resource :cart_details
+  resources :cart_details, only: %i[create update destroy]
+  resources :orders
   # as :user do
   #   get 'signin' => 'devise/sessions#new'
   #   post 'signin' => 'devise/sessions#create'
