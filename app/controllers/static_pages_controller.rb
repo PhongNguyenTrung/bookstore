@@ -5,7 +5,7 @@ class StaticPagesController < ApplicationController
   end
 
   def category
-    @categories = Category.all
+    @categories = Category.all.order(:name)
 
     # return unless
 

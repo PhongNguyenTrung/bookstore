@@ -2,7 +2,7 @@
 <div class="banner-shop"><h2>Category</h2></div>
 <%# <%= render 'layouts/result' if @show_search%> 
 <div class="category">
-    <div class="blog-banner container">
+    <div class="blog-banner container-md">
         <h1 class="mb-5">Inspire Daily Reading</h1>
         <h6 class="mb-5">Visit Our Blog and Page Find Out Daily Inspiration Quotes from the best Authors</h6>
         <button class="btn btn-dark px-4">VISIT OUR BLOG</button>
@@ -10,14 +10,14 @@
     
     <div class="container my-5">
         <div class="row g-4">
-            <div class="col-3 sidebar">
+            <div class="col-md-3 sidebar">
                 <h3 class="mb-4">Category</h3>
                 <p> <%= link_to "All Categories", category_path(category: 0)%> </p>
                 <% @categories.each do |category| %>
                     <p> <%= link_to category.name, category_path(category: category.id)%> </p>
                 <% end %>
             </div>
-            <div class="col-9 content ms-auto">
+            <div class="col-md-9 content ms-auto">
                 <p>Showing all <%=@books.count%> results</p>
                 <div class="my-2">
                     <div class="row row-cols-1 row-cols-md-4 g-4">

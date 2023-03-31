@@ -17,7 +17,7 @@
         </tbody>
     </table>
     <div class="proceed-to-checkout my-2">
-        <%= link_to "Proceed to checkout", order_show_path, class: 'btn btn-danger btn-lg w-100'%>
+        <%= button_to "Proceed to checkout", order_show_path, class: 'btn btn-danger btn-lg w-100', disabled: true, method: :get%>
     </div>
 </div>
 <div style="clear: both;"></div>

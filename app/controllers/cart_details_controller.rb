@@ -12,17 +12,17 @@ class CartDetailsController < ApplicationController
 
   def update
     @item = current_cart.cart_details.find(params[:id])
-    quantity = if params[:quantity].present? 
-                  params[:quantity] 
-              else 
-                @item.quantity
-              end
-    status = if params[:status].present? 
-              params[:status] 
-            else 
-              @item.status
-            end
-    if @item.update(quantity: quantity, status: status)
+    quantity = if params[:quantity].present?
+                 params[:quantity]
+               else
+                 @item.quantity
+               end
+    status = if params[:status].present?
+               params[:status]
+             else
+               @item.status
+             end
+    if @item.update(quantity:, status:)
       flash[:notice] = 'Cart has been updated!'
       @item[:total_price] = @item[:quantity] * @item.book.price
       @item.save
@@ -41,5 +41,4 @@ class CartDetailsController < ApplicationController
   def cart_detail_params
     params.require(:cart_detail).permit(:book_id, :status, :quantity)
   end
-
 end

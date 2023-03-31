@@ -90,6 +90,7 @@
         </div>
     </div>
     <div class="d-grid gap-2 col-lg-4 mx-auto">
-        <button type="button" class="btn btn-dark btn-lg" >Discovery More Book In Shop</button>
+        <%# <button type="button" class="btn btn-dark btn-lg" >Discovery More Book In Shop</button> %>
+        <%= button_to "Discovery More Book In Shop", shop_books_path(@shop.id), class:"btn btn-dark btn-lg", method: :get%>
     </div>
 </div>

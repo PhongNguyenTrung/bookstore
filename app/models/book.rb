@@ -1,5 +1,6 @@
 class Book < ApplicationRecord
   belongs_to :shop
+  has_many :order_details
   has_many :cart_details
   has_and_belongs_to_many :categories, -> { order('name DESC') }
   validates :shop_id, presence: true

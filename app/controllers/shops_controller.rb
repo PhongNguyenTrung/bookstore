@@ -34,8 +34,19 @@ class ShopsController < ApplicationController
   def show
     @shop = current_user.shops.find(params[:id])
     @books = @shop.books.order(:title).page(params[:page]).per(20)
+    @order = @shop.order_details.order(:created_at)
     @book = @shop.books.build
     @category = Category.all.order(:name)
+  end
+
+  def order
+    @shop = current_user.shops.find(params[:shop_id])
+    @orders = @shop.order_details.where(status: false).order(:created_at).page(params[:page]).per(20)
+  end
+
+  def bill
+    @shop = current_user.shops.find(params[:shop_id])
+    @bills = @shop.order_details.where(status: true).order(created_at: :desc).page(params[:page]).per(20)
   end
 
   def showAll; end

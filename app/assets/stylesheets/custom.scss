@@ -214,6 +214,68 @@ form{
     }
 }
 
+// shop detail page
+.shop-page{
+    .store-category{
+        ul{
+            color: $gray-text;
+            background-color: #d6f3e5;
+            border-radius: 15px;
+            padding: 20px 30px;
+            list-style: none;
+            li:hover{
+                font-size: large;
+                color: $red-color;
+            }
+        }
+    }
+    .shop-info{
+        border-radius: 15px;
+        background: url('shop-bg.jpg') no-repeat;
+        background-size: cover;
+        .shop-summary div{
+            padding-bottom: 10px;
+            i{
+                padding-right: 10px;
+            }
+        }
+        .shop-summary{
+            padding: 30px;
+            color: white;
+            width: 50%;
+            border-top-left-radius: 15px;
+            border-bottom-left-radius: 15px;
+            background-color: rgba(0,0,0,.6);
+            img{
+                border-radius: 15px;
+                background: #fff;
+                padding: 3px;
+                margin-bottom: 22px
+            }
+        }
+    }
+
+    .shop-product{
+        margin: 30px 0;
+        h4{
+            border-bottom: 2px solid $red-color;
+            padding-bottom: 10px;
+        }
+        .search{
+            margin: 20px 0;
+        }
+        .product{
+            .pagination{
+                float: right;
+                padding: 20px 0;
+                text-align: right;
+                span{
+                    padding: 0 5px;
+                }
+            }
+        }
+    }
+}
 // ------------------- Book --------------------- //
 .select2-container--default .select2-selection--multiple .select2-selection__choice__display{
     padding-left: 20px;
@@ -229,6 +291,11 @@ form{
 }
 .book-detail{
     color: $gray-text;
+    .col-md-4{
+        img{
+            width: 100%;
+        }
+    }
     .author{
         font-size: 20px;
     }
@@ -411,7 +478,7 @@ form{
             
         }
         .proceed-to-checkout{
-            a{
+            button{
                 border-radius: 0;
             }
         }
@@ -484,3 +551,30 @@ form{
         }
     }
 }
+
+// --------------------- bill ---------------------- //
+.bill{
+    margin: 0 auto;
+    padding: 50px 0px;
+    background-color: $gray-background;
+    .bill-content{
+        .notice {
+            padding-bottom: 20px;
+            color: $gray-text;
+        }
+        .bill-detail{
+            background-color: white;
+            padding: 10px 20px;
+            label{
+                width:100%;
+                padding-bottom: 10px;
+                color: $gray-text;
+                text-transform: uppercase;
+            }
+            .col-md-2{
+                border-right: 1px solid $gray-text;
+            }
+        }
+    }
+}
+

@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :current_shop, only: %i[edit create update destroy]
+  before_action :current_shop, only: %i[edit create update destroy index]
   def new; end
 
   def show
@@ -10,6 +10,13 @@ class BooksController < ApplicationController
     @book.categories.each do |category|
       @categories.push category.name
     end
+  end
+
+  def index
+    @categories = Category.all.order(:name)
+    @books = @current_shop.books
+    @books = @books.where('title LIKE ?', "%#{params[:title]}%") if params[:title].present? && (params[:title] != '')
+    @books = @books.order(:title).page(params[:page]).per(12)
   end
 
   def edit

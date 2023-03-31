@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_29_041850) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_29_085156) do
   create_table "books", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title"
     t.decimal "price", precision: 10
@@ -76,14 +76,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_29_041850) do
 
   create_table "orders", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "shop_id", null: false
     t.boolean "status"
     t.decimal "total_price", precision: 10
     t.text "shipping_address"
     t.string "payment_method"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["shop_id"], name: "index_orders_on_shop_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -121,7 +119,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_29_041850) do
   add_foreign_key "order_details", "Books"
   add_foreign_key "order_details", "Orders"
   add_foreign_key "order_details", "Shops"
-  add_foreign_key "orders", "shops"
   add_foreign_key "orders", "users"
   add_foreign_key "shops", "users"
 end

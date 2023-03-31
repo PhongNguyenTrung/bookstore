@@ -1,0 +1,13 @@
+<div class="shop-tabs container my-4">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <%= link_to "Product", shop_path(@shop), class: 'nav-link'%>
+    </li>
+    <li class="nav-item">
+        <%= link_to "Order", shop_order_path(@shop), class: 'nav-link'%>
+    </li>
+    <li class="nav-item">
+        <%= link_to "Bill", shop_bill_path(@shop), class: 'nav-link'%>
+    </li>
+  </ul>
+</div>

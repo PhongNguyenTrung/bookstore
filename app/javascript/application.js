@@ -106,13 +106,13 @@ $(document).on("turbo:load", () => {
   })
 
   // click on proceed to checkout
-  $('.cart-totals .proceed-to-checkout > a').on('click', function(){
+  $('.cart-totals .proceed-to-checkout button').on('click', function(){
     var $checkedRows = $('.cart-table table tbody > tr').has('input[type="checkbox"]:checked');
     $checkedRows.each(function(){
       var id = $(this).data('id');
       $.ajax({
         url: `/cart_details/${id}`,
-        method: 'PATCH',
+        method: 'PUT',
         data: {status: true},
         success: function(response){
             
@@ -125,13 +125,52 @@ $(document).on("turbo:load", () => {
     });
   });
 
+  $('.order .payment .payment-method #shipping_address').on('change', function(){
+    if($(this).val() != ''){
+      $('.order .payment .place-order button').prop('disabled', false);
+    }
+    else
+      $('.order .payment .place-order button').prop('disabled', true);
+  });
+  
   // click on place order 
   $('.order .payment .place-order button').on('click', function(){
     var data = {};
     data["payment_method"] = $('.order .payment .payment-method input:checked').val();
-    if($('.order .payment .payment-method input:checked'))
-    alert(data);
+    if($('.order .payment .payment-method #shipping_address').val() != ''){
+      var id = $(this).data('id');
+      data["shipping_address"] = $('.order .payment .payment-method #shipping_address').val();
+      data["status"] = true;
+      $.ajax({
+        url: `/order/${id}`,
+        method: 'PUT',
+        data: data,
+        success: function(response){
+            // delete all cart-details in order
+          deleteCartDetails();
+           
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+          alert("Faile to update!")
+        }
+      });
+    }
+    else {
+      alert('Please type Shipping Address before placing order!');
+    }
+  });
+
+  // click on Done to process order in Shop page
+  $('.shop-order-processing table tr td a').on('click', function(){
+    $(this).closest('tr').remove();
+    alert('Processing order!')
   })
+
+  // // click on shops tab
+  // $('.shop-tabs .nav-tabs .nav-item a').on('click', function(){
+  //   $('.shop-tabs .nav-tabs .nav-item a.active').removeProp('aria-current').removeClass('active');
+  //   $(this).addClass('active');
+  // });
 });
 
 function toCurrency(currency){
@@ -154,10 +193,24 @@ function calculateSubTotal(){
   $checkedRows.each(function(){
     total += currencyToFloat($(this).find('td.sub-total').text());
   });
-  // $('.cart-table table tbody > tr td.sub-total').each(function(){
-  //   total = total + currencyToFloat($(this).text());
-  // });
+  
   // update subtotal and total
   $subTotal.text(toCurrency(total));
   $total.text(toCurrency(total - currencyToFloat($discount.text())));
+  if($checkedRows.length) 
+    $('.cart-totals .proceed-to-checkout button').prop('disabled', false);
+  else  $('.cart-totals .proceed-to-checkout button').prop('disabled', true);
+}
+
+function deleteCartDetails(){
+  $(".order .order-review tr.item").each(function(){
+    var id = $(this).data("id");
+    $.ajax({
+      url: `/cart_details/${id}`,
+      method: 'DELETE',
+      success: function(result) {
+        
+      }
+    })
+  });
 }
