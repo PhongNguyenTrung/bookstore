@@ -7,14 +7,14 @@
 
   <%= form_with(model: @shop, local: true) do |f| %>
     <%= render "devise/shared/error_messages", resource: @shop %>
-    <%= f.label :name %>
-    <%= f.text_field :name, autofocus: true%>
+    <%= f.label "Name*" %>
+    <%= f.text_field :name, autofocus: true, required: true%>
 
-    <%= f.label :address %>
-    <%= f.text_field :address%>
+    <%= f.label "Address*" %>
+    <%= f.text_field :address, required: true%>
 
-    <%= f.label :phone %>
-    <%= f.text_field :phone %>
+    <%= f.label "Phone*" %>
+    <%= f.text_field :phone, placeholder: '0123456789', required: true %>
 
     <%= f.label :tax_code %>
     <%= f.number_field :tax_code %>

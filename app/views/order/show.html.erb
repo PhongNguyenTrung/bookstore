@@ -1,0 +1,75 @@
+<% provide(:title, 'Checkout')%>
+<div class="banner-shop">
+    <h2>Checkout</h2>
+</div>
+<div class="order">
+    <div class='row'>
+        <div class="col-md-6">
+            <h3 class="order-review-heading">Order</h3>
+            <div class="order-review">
+                <table class="container">
+                    <tbody>
+                        <%if not @items.nil?%>
+                            <% @items.each do |item| %>
+                            <tr class="item" data-id="<%=item.id%>">
+                                <td><%=item.book.title%> - <%=item.book.author%> x <%=item.quantity%></td>
+                                <td><%=number_to_currency item.total_price%></td>
+                            </tr>
+                            <%end%>
+                        <%else%>
+                            <tr> <td class="empty"><p>Nothing in order! </p> </td></tr>
+                        <%end%>
+                    
+                        <tr>
+                            <td>Subtotal</td>
+                            <td><%=number_to_currency @sub_total%></td>
+                        </tr>
+                        <tr>
+                            <td>Voucher</td>
+                            <td><%=number_to_currency @voucher%></td>
+                        </tr>
+                        <tr>
+                            <td>Total</td>
+                            <td><%=number_to_currency @total%></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h3>Payment</h3>
+            <div class='payment'>
+                <ul class="payment-method">
+                    <li class="payment-by-cash">
+                        <input id="payment_method_cod" type="radio" class="input-radio" name="payment_method" value="cod" checked="checked">
+                        <label for="payment_method_cod">Cash on delivery</label>
+                        <div class="payment_box payment_method_cod" style="">
+                            <p>Pay with cash upon delivery.</p>
+                        </div>
+                    </li>
+                    <li class="payment-by-paypal">
+                        <input id="payment_method_paypal" type="radio" class="input-radio" name="payment_method" value="paypal">
+
+                        <label for="payment_method_paypal">
+                            PayPal <img src="https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg" alt="PayPal acceptance mark" width="100px"><a href="https://www.paypal.com/us/webapps/mpp/paypal-popup" class="about_paypal" onclick="javascript:window.open('https://www.paypal.com/us/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;"> What is PayPal?</a>	</label>
+                            <div class="payment_box payment_method_paypal">
+                                <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
+                            </div>
+                        </label>
+                    </li>
+                    <li>
+                        <label for="shipping_address">
+                            Shipping Address*
+                        </label>
+                        <input id="shipping_address" type="text" name="shipping_address" value="" height="50px">
+                    </li>
+                    <li class="place-order">
+                        <%# <button class="btn btn-dark btn-lg">Place Order</button> %>
+                        <%=button_to 'Place Order', order_export_bill_path(@order), class: 'btn btn-dark btn-lg', data: {id: @order.id}, disabled: true, method: :get%>
+                    </li>
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</div>

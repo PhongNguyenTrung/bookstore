@@ -1,0 +1,58 @@
+<% provide(:title, 'Cart')%>
+
+<div class="banner-shop">
+    <h2>Cart</h2>
+</div>
+<div class="cart">
+    <div class="container cart-table">
+        <table class="table align-middle">
+            <thead>
+                <tr class="table-header">
+                    <th scope="col"></th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Sub_total</th>
+                    <th scope="col">Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @cart_details.each do |item| %>
+                    <tr data-id="<%=item.id%>">
+                        <td class="status"><input type="checkbox" value="" ></td>
+                        <td class="title"><%= link_to image_tag(item.book.img_url) + item.book.title, book_path(item.book)%></td>
+                        <td class="price"><%= number_to_currency item.book.price%></td>
+                        <td class="quantity">
+                            <button class="increase bi bi-plus-lg mx-2"></button>
+                            <input type="number" value="<%= item.quantity%>" disabled/>
+                            <button class="decrease bi bi-dash-lg mx-2"></button>
+                        </td>
+                        <td class="sub-total"><%= number_to_currency item.total_price%></td>
+                        <td class="action">
+                            <%# <i class= 'btn btn-danger bi bi-x-lg'></i> %>
+                            <%= link_to '', cart_detail_path(item), method: :delete, class: 'btn btn-danger bi bi-x-lg', remote: true %> 
+                        </td>
+                    </tr>
+                <% end %>
+
+                <tr>
+                    <td colspan="2" class="cart-coupon">
+                        <span class="input-group cart-coupon-inner">
+                            <div class="input-group-text" id="btnGroupIcon"> <i class="bi bi-cash-coin"></i></div>
+                            <input type="text" class="form-control" placeholder="Coupon Code" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                            <button type="button" class="btn btn-outline-secondary">Apply Coupon</button>
+                        </span>
+                    </td>
+                    <td colspan="4" class="actions">
+                        <div class="actions-inner">
+                            <%= link_to "Continue Shopping", category_path, class: "btn btn-outline-dark"%>
+                            <button class="btn btn-dark" disabled>Update Cart</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <%= render "carts/cart_totals"%>
+</div>

@@ -1,0 +1,29 @@
+<% provide(:title, 'Bill')%>
+<div class="banner-shop">
+    <h2>Bill</h2>
+</div>
+<div class='bill'>
+    <div class="container-md bill-content">
+        <div class="notice"><p>Thank you. Your order has been received.</p></div>
+        <div class="bill-detail">
+            <div class="row justify-content-start">
+                <div class="col-md-2">
+                    <label>Order Number:<label>
+                    <strong><%=@order.id%></strong>
+                </div>
+                <div class="col-md-2">
+                    <label>Date:<label>
+                    <strong><%=@order.created_at.strftime("%d %m, %Y")%></strong>
+                </div>
+                <div class="col-md-2">
+                    <label>Total:<label>
+                    <strong><%=number_to_currency @order.total_price%></strong>
+                </div>
+                <div class="col">
+                    <label>Payment Method:<label>
+                    <strong><%=@order.payment_method == 'cod' ? "Cash On Delivery" : "Checkout with Paypal"%></strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

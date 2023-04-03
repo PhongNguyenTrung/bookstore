@@ -1,116 +1,128 @@
 <% provide(:title, @shop.name) %>
-<h2>All Books from <%= @shop.name%></h2>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary float-end mb-2 bi bi-plus-circle" data-bs-toggle="modal" data-bs-target="#newBook">
-  Add book
-</button>
 
-<!-- Modal -->
-<div class="modal fade" id="newBook" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New book</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <%= form_with(model: @book, url: shop_books_path(@shop), local: true, as: :book) do |f| %>  
-            <%= f.label :title %>
-            <%= f.text_field :title, autofocus: true, name: "book[title]"%>
+<%= render 'shops/shop_nav'%>
+<div class="shops container-md my-2">
+  <h2>All Books from <%= @shop.name%></h2>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary float-end mb-2 bi bi-plus-circle" data-bs-toggle="modal" data-bs-target="#newBook">
+    Add book
+  </button>
 
-            <%= f.label :price %>
-            <%= f.number_field :price, name: "book[price]" %>
+  <!-- Modal -->
+  <div class="modal fade" id="newBook" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New book</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <%= form_with(model: @book, url: shop_books_path(@shop), local: true, as: :book) do |f| %>  
+              <%= render "devise/shared/error_messages", resource: @book %>
+              <%= f.label "Title*" %>
+              <%= f.text_field :title, autofocus: true, required: true%>
 
-            <%= f.label :year %>
-            <%= f.date_field :year, name: "book[year]" %>
+              <%= f.label :author %>
+              <%= f.text_field :author%>
 
-            <%= f.label :amount %>
-            <%= f.number_field :amount,  name: "book[amount]" %>
+              <%= f.label :publisher %>
+              <%= f.text_field :publisher%>
 
-            <%= f.label :img_url %>
-            <%= f.text_field :img_url,  name: "book[url]" %>
+              <%= f.label :Category %>
+              <%= f.select :category_ids, options_for_select(@category.map{ |c| [c.name, c.id] }, @book.category_ids), { include_hidden: false }, {class: 'multiselect-modal', multiple: 'multiple'}%>
+              
+              <%= f.label "Price*" %>
+              <%= f.number_field :price, required: true%>
 
-            <%= f.label :description %>
-            <%= f.text_area :description,  name: "book[description]" %>
+              <%= f.label "Published Year" %>
+              <%= f.date_field :year%>
 
-            <%= f.submit "Create", class: "btn btn-primary" %>
-        <% end %>
+              <%= f.label "Amount*" %>
+              <%= f.number_field :amount, required: true%>
+
+              <%= f.label :img_url %>
+              <%= f.text_field :img_url%>
+
+              <%= f.label :description %>
+              <%= f.text_area :description%>
+
+              <%= f.submit "Create", class: "btn btn-primary" %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 
-<div>
-    <% if @shop.books.any? %>
-    <table class="All-books table table-striped table-hover">
-    <thead>
-        <tr class="table-dark">
-            <th scope="col">#</th>
-            <th scope="col">Title</th>
-            <th scope="col">Price</th>
-            <th scope="col">Year</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @books.each.with_index(1) do |book, index| %>
-            <tr>
-                <th scope="row"><%= index %></th>
-                <td><%= book.title %></td>
-                <td><%= book.price %></td>
-                <td><%= book.year %></td>
-                <td><%= book.amount %></td>
-                <td><%= link_to "Edit", edit_shop_book_path(@shop, book)%> <%= link_to "Delete", shop_book_path(@shop, book), method: :delete %> </td>
-            </tr>
-        <% end %>
-    </tbody>
-    </table>
-
-  <% if @books.total_pages > 1 %>
-    <nav aria-label="Page navigation">
-      <ul class="pagination justify-content-center">
-
-        <% if @books.current_page == 1 %>
-          <li class="page-item disabled">  
-            <a class="page-link" href="#" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-        <% else %>
-          <li class="page-item">  
-            <a class="page-link" href="<%= url_for(page: @books.current_page - 1)%>" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-        <% end %>
-          
-        <% (1..@books.total_pages).each do |page| %>
-          <% if page == @books.current_page %>
-            <li class="page-item active"><a class="page-link" href="#"><%=page%></a></li>
-          <% else %>
-            <li class="page-item"><a class="page-link" href="<%= url_for(page: page) %>"><%=page%></a></li>
+  <div>
+      <% if @shop.books.any? %>
+      <table class="All-books table table-striped table-hover">
+      <thead>
+          <tr class="table-dark">
+              <th scope="col">#</th>
+              <th scope="col">Title</th>
+              <th scope="col">Price</th>
+              <th scope="col">Year</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Actions</th>
+          </tr>
+      </thead>
+      <tbody>
+          <% @books.each.with_index(1) do |book, index| %>
+              <tr>
+                  <th scope="row"><%= index %></th>
+                  <td><%= book.title %></td>
+                  <td><%= book.price %></td>
+                  <td><%= book.year %></td>
+                  <td><%= book.amount %></td>
+                  <td><%= link_to "Edit", edit_shop_book_path(@shop, book)%> <%= link_to "Delete", shop_book_path(@shop, book), method: :delete %> </td>
+              </tr>
           <% end %>
-        <% end %>
-      
-        <% if @books.current_page == @books.total_pages %>
-          <li class="page-item disabled">  
-            <a class="page-link" href="#" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        <% else %>
-          <li class="page-item">  
-            <a class="page-link" href="<%= url_for(page: @books.current_page + 1)%>" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        <% end %>
-      </ul>
-    </nav>
-  <% end %>
+      </tbody>
+      </table>
 
+    <% if @books.total_pages > 1 %>
+      <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
 
+          <% if @books.current_page == 1 %>
+            <li class="page-item disabled">  
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+          <% else %>
+            <li class="page-item">  
+              <a class="page-link" href="<%= url_for(page: @books.current_page - 1)%>" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+          <% end %>
+            
+          <% (1..@books.total_pages).each do |page| %>
+            <% if page == @books.current_page %>
+              <li class="page-item active"><a class="page-link" href="#"><%=page%></a></li>
+            <% else %>
+              <li class="page-item"><a class="page-link" href="<%= url_for(page: page) %>"><%=page%></a></li>
+            <% end %>
+          <% end %>
+        
+          <% if @books.current_page == @books.total_pages %>
+            <li class="page-item disabled">  
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          <% else %>
+            <li class="page-item">  
+              <a class="page-link" href="<%= url_for(page: @books.current_page + 1)%>" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+      </nav>
     <% end %>
+  <% end %>
+</div>
 </div>

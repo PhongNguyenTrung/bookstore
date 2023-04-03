@@ -1,0 +1,23 @@
+<div class="cart-totals">
+    <h3>Cart totals</h3>
+    <table class="table shop-table align-middle" >
+        <tbody>
+            <tr class="cart-subtotal">
+                <td class="table-dark col-3">Subtotal</th>
+                <td colspan="2"><%= number_to_currency 0%></td>
+            </tr>
+            <tr class="cart-coupon">
+                <td class="table-dark col-3">Discount</th>
+                <td colspan="2"><%= number_to_currency 0%></td>
+            </tr>
+            <tr class="order-total">
+                <td class="table-dark col-3">Total</th>
+                <td colspan="2"><%= number_to_currency 0%></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="proceed-to-checkout my-2">
+        <%= button_to "Proceed to checkout", order_show_path, class: 'btn btn-danger btn-lg w-100', disabled: true, method: :get%>
+    </div>
+</div>
+<div style="clear: both;"></div>
