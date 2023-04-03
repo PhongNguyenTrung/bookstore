@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   before_action :current_shop, only: %i[edit create update destroy index]
+  before_action :authenticate_user!, only: %i[edit create destroy update]
   def new; end
 
   def show

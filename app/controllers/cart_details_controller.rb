@@ -1,4 +1,5 @@
 class CartDetailsController < ApplicationController
+  before_action :authenticate_user!
   def create
     @item = current_cart.cart_details.build(cart_detail_params)
     @item[:total_price] = @item[:quantity] * @item.book.price
@@ -33,7 +34,7 @@ class CartDetailsController < ApplicationController
 
   def destroy
     current_cart.cart_details.find(params[:id]).destroy
-    flash[:notice] = 'Delete item successfully!'
+    # flash[:notice] = 'Delete item successfully!'
   end
 
   private

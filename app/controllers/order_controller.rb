@@ -1,4 +1,5 @@
 class OrderController < ApplicationController
+  before_action :authenticate_user!
   def show
     @items = current_cart.cart_details.where(status: true)
     @sub_total = @items.sum { |item| item.total_price }

@@ -10,7 +10,7 @@
 10.times do
   name = Faker::Book.unique.genre
   description = Faker::Lorem.sentence(word_count: 20)
-  img_url = Faker::LoremFlickr.image
+  img_url = 'https://picsum.photos/300'
   Category.create!(name:, description:, img_url:)
 end
 
@@ -61,7 +61,8 @@ users.each do |user|
       price = Faker::Number.between(from: 1, to: 1000)
       amount = 10
       description1 = Faker::Lorem.sentence(word_count: 20)
-      img_url = Faker::LoremFlickr.image
+      # img_url = Faker::LoremFlickr.image
+      img_url = 'https://picsum.photos/300'
       category_ids = []
       category_ids.push Category.order('RAND()').first.id
       shop.books.create!(title:, price:, amount:, author:, publisher:, descrition: description1, img_url:,
